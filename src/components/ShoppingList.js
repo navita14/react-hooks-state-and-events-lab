@@ -4,12 +4,7 @@ import Item from "./Item";
 function ShoppingList({ items }) {
   const [filterBy, setFilterBy] = useState("All");
 
-  function handleFilterChange(event){
-    setFilterBy(event.target.value)
-  }
-
-  const [foods, setFoods] = useState(true);
-  const foodsToDisplay = items.filter((item) => {
+  const itemsToDisplay = items.filter((item) => {
     if (filterBy === "All"){
       return true;
     } else {
@@ -17,6 +12,10 @@ function ShoppingList({ items }) {
     }
   })
 
+  function handleFilterChange(event){
+    setFilterBy(event.target.value)
+    console.log(event.target.value)
+  }
   return (
     <div className="ShoppingList">
       <div className="Filter">
@@ -28,7 +27,7 @@ function ShoppingList({ items }) {
         </select>
       </div>
       <ul className="Items">
-        {items.map((item) => (
+        {itemsToDisplay.map((item) => (
           <Item key={item.id} name={item.name} category={item.category} />
         ))}
       </ul>
